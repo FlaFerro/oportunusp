@@ -1,0 +1,8 @@
+<h1>Oportunidades de Pesquisa</h1>
+<ul>
+    {% for opportunity in opportunities %}
+        <li>
+            <a href="{% url 'opportunity_detail' opportunity.pk %}">{{ opportunity.title }}</a> - {{ opportunity.category }}
+        </li>
+    {% endfor %}
+</ul>
