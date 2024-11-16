@@ -56,8 +56,10 @@ ROOT_URLCONF = 'oportunusp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR / 'templates',  # Certifique-se de que a raiz do projeto tem a pasta 'templates'
+        ],
+        'APP_DIRS': True,  # Permite que o Django procure por templates dentro das aplicações
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -124,3 +126,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = '/'

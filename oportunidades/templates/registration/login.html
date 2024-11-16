@@ -1,0 +1,16 @@
+<!-- templates/registration/login.html -->
+{% extends 'base_generic.html' %}
+
+{% block title %}Login - Oportunusp{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Entrar</button>
+</form>
+
+<p>Não tem uma conta? <a href="{% url 'register' %}">Crie uma agora!</a></p>
+{% endblock %}

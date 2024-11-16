@@ -1,8 +1,19 @@
-<h1>Oportunidades de Pesquisa</h1>
-<ul>
-    {% for opportunity in opportunities %}
-        <li>
-            <a href="{% url 'opportunity_detail' opportunity.pk %}">{{ opportunity.title }}</a> - {{ opportunity.category }}
-        </li>
-    {% endfor %}
-</ul>
+<!-- oportunidades/templates/oportunidades/oportunidades_lista.html -->
+{% extends 'base_generic.html' %}
+
+{% block title %}Lista de Oportunidades{% endblock %}
+
+{% block content %}
+    <h2>Lista de Oportunidades</h2>
+    <ul>
+        {% for oportunidade in oportunidades %}
+            <li>
+                <strong>{{ oportunidade.titulo }}</strong><br>
+                {{ oportunidade.descricao }}<br>
+                <a href="{% url 'opportunity_detail' oportunidade.pk %}">Ver Detalhes</a>
+            </li>
+        {% empty %}
+            <li>Não há oportunidades disponíveis no momento.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
