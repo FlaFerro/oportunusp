@@ -1,23 +1,32 @@
-<!-- oportunidades/templates/oportunidades/home.html -->
+<!-- templates/home.html -->
 {% extends 'base_generic.html' %}
 
 {% block title %}Home - Oportunusp{% endblock %}
 
 {% block content %}
-    <h2>Bem-vindo à Página Inicial!</h2>
-    <p>Explore as oportunidades de pesquisa disponíveis e conecte-se com a comunidade acadêmica!</p>
+    
+    <p>Encontre as melhores oportunidades de pesquisa aqui!</p>
+    
+    {% if user.is_authenticated %}
+        <p>Olá, {{ user.username }}!</p>
+        
+        <!-- Formulário de Logout -->
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
 
-    <h3>O que você pode fazer?</h3>
-    <ul>
-        <li>Verificar oportunidades de pesquisa</li>
-        <li>Se inscrever em grupos de extensão</li>
-        <li>Conectar com professores e laboratórios</li>
-    </ul>
-
-    <!-- Link para a página de login -->
-    <p><a href="{% url 'login' %}">Entrar</a></p>
-
-    <!-- Link para a lista de oportunidades -->
-    <p><a href="{% url 'opportunity_list' %}">Ver Oportunidades</a></p>
-
+    {% else %}
+        <a href="{% url 'login' %}">
+            <button>Entrar</button>
+        </a>
+        <a href="{% url 'register' %}">
+            <button>Criar Conta</button>
+        </a>
+    {% endif %}
+    
+    <h2>Oportunidades</h2>
+    <a href="{% url 'opportunity_list' %}">
+        <button>Ver Oportunidades</button>
+    </a>
 {% endblock %}
