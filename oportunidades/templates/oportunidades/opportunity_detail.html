@@ -3,3 +3,4 @@
 <p><strong>Publicado por:</strong> {{ opportunity.posted_by.username }}</p>
 <p>{{ opportunity.description }}</p>
 <p><strong>Publicado em:</strong> {{ opportunity.date_posted }}</p>
+<a href="{% url  'opportunity_edit' opportunity.pk %}"> Editar oportunidade</a>

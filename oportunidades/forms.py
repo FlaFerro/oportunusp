@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Opportunity
+from django.forms import ModelForm
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -13,3 +15,20 @@ class UserRegistrationForm(forms.ModelForm):
         if len(password) < 6:
             raise forms.ValidationError("A senha deve ter pelo menos 6 caracteres.")
         return password
+
+class PostForm(ModelForm):
+    class Meta:
+        model = Opportunity
+        fields = [
+            'title',
+            'description',
+            'category',
+            'is_active',
+        ]
+        labels = {
+            'title' : 'Título', 
+            'description':'Descição da oportunidade', 
+            'category':'Categoria' ,
+            'is_active':'Vísivel ao público?',
+        }
+        
