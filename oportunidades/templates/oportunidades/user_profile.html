@@ -1,0 +1,27 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<h2>Meu Perfil</h2>
+
+<div>
+    <img src="{{ profile.profile_picture.url }}" alt="Foto de perfil" style="max-width: 150px; border-radius: 50%;">
+    <p><strong>Usuário:</strong> {{ request.user.username }}</p>
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+    <p><strong>Descrição:</strong> {{ profile.description }}</p>
+</div>
+
+<hr>
+
+<h3>Oportunidades Criadas</h3>
+<ul>
+    {% for opportunity in opportunities %}
+        <li>
+            <a href="{% url 'opportunity_detail' opportunity.pk %}">{{ opportunity.title }}</a> - {{ opportunity.date_posted|date:"d/m/Y" }}
+        </li>
+    {% empty %}
+        <li>Você ainda não criou nenhuma oportunidade.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

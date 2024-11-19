@@ -1,5 +1,49 @@
-<h1>{{ opportunity.title }}</h1>
-<p><strong>Categoria:</strong> {{ opportunity.category }}</p>
-<p><strong>Publicado por:</strong> {{ opportunity.posted_by.username }}</p>
-<p>{{ opportunity.description }}</p>
-<p><strong>Publicado em:</strong> {{ opportunity.date_posted }}</p>
+{% extends 'base_generic.html' %}
+
+{% block title %}Detalhes da Oportunidade{% endblock %}
+
+{% block content %}
+    <h2>{{ opportunity.title }}</h2>
+    <p>{{ opportunity.description }}</p>
+    <p><strong>Publicado por:</strong> {{ opportunity.posted_by.username }}</p>
+    
+    <h3>Comentários</h3>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+                <a href="#comment-{{ comment.id }}" onclick="document.getElementById('reply-{{ comment.id }}').style.display='block'">Responder</a>
+                
+                <!-- Respostas -->
+                <ul>
+                    {% for reply in comment.replies.all %}
+                        <li>
+                            <p><strong>{{ reply.user.username }}:</strong> {{ reply.content }}</p>
+                        </li>
+                    {% empty %}
+                        <li>Sem respostas.</li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Formulário de resposta -->
+                <div id="reply-{{ comment.id }}" style="display:none;">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ comment_form.as_p }}
+                        <input type="hidden" name="parent_comment" value="{{ comment.id }}">
+                        <button type="submit">Responder</button>
+                    </form>
+                </div>
+            </li>
+        {% empty %}
+            <li>Sem comentários.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Deixe um comentário</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Postar Comentário</button>
+    </form>
+{% endblock %}
