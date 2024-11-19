@@ -3,6 +3,7 @@
 {% block title %}Detalhes da Oportunidade{% endblock %}
 
 {% block content %}
+<a href="{% url  'opportunity_edit' opportunity.pk %}"> Editar oportunidade</a>
     <h2>{{ opportunity.title }}</h2>
     <p>{{ opportunity.description }}</p>
     <p><strong>Publicado por:</strong> {{ opportunity.posted_by.username }}</p>

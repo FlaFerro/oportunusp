@@ -12,4 +12,5 @@ urlpatterns = [
     path('register/', register, name='register'), 
     path('opportunity/', views.opportunity_list, name='opportunity_list'),
     path('meu-perfil/', user_profile, name='user_profile'),
+    path('opportunity_edit/<int:pk>/', views.opportunity_edit_updateView.as_view(), name='opportunity_edit')
 ]
