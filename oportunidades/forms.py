@@ -23,12 +23,10 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError("A senha deve ter pelo menos 6 caracteres.")
         return password
 
-<<<<<<< HEAD
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content']
-=======
 class PostForm(ModelForm):
     class Meta:
         model = Opportunity
@@ -45,4 +43,3 @@ class PostForm(ModelForm):
             'is_active':'Vísivel ao público?',
         }
         
->>>>>>> Edição_Oportunidade_(Gustavo)

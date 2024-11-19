@@ -82,6 +82,7 @@ def user_profile(request):
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
 
+# Acho que devemos colocar @login_required aqui.
 class opportunity_edit_updateView(View):
     def get(self, request, pk):
         opportunity = get_object_or_404(Opportunity, pk=pk)
