@@ -105,3 +105,18 @@ class opportunity_edit_updateView(View):
             opportunity.is_active = form.cleaned_data['is_active']
             opportunity.save()
             return HttpResponseRedirect(reverse('opportunity_detail', args = (pk, )))
+
+
+@login_required
+def create_opportunity(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            opportunity = form.save(commit=False)
+            opportunity.posted_by = request.user  # Atribui o usuário logado como criador
+            opportunity.save()
+            return redirect('opportunity_list')  # Redireciona para a lista de oportunidades
+    else:
+        form = PostForm()
+
+    return render(request, 'oportunidades/create_opportunity.html', {'form': form})
