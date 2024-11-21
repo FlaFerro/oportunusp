@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+  <h2>Editar Pefil de {{ profile.user}}</h2>
+  <form method="post" action="{% url 'edit_profile' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Atualizar Perfil</button>
+  </form>
+{% endblock %}
