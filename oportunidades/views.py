@@ -8,6 +8,8 @@ from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.views import  View
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+
 
 
 def opportunity_list(request):
@@ -82,8 +84,10 @@ def user_profile(request):
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
 
-# Acho que devemos colocar @login_required aqui.
+
+@method_decorator(login_required, name='dispatch')
 class opportunity_edit_updateView(View):
+
     def get(self, request, pk):
         opportunity = get_object_or_404(Opportunity, pk=pk)
         form = PostForm(
