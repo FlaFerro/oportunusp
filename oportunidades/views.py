@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Opportunity, Profile, Comment
 from django.contrib.auth.decorators import permission_required, login_required
-from .forms import UserRegistrationForm, CommentForm, PostForm
+from .forms import UserRegistrationForm, CommentForm, PostForm, ProfileEditForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.db import transaction
@@ -124,3 +124,25 @@ def create_opportunity(request):
         form = PostForm()
 
     return render(request, 'oportunidades/create_opportunity.html', {'form': form})
+
+def edit_user_profile(request):
+    profile = Profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        opportunities = Opportunity.objects.filter(posted_by=request.user)
+        form = ProfileEditForm(request.POST,request.FILES)
+        if form.is_valid():
+            profile.description = form.cleaned_data['description']
+            profile.profile_pic = form.cleaned_data['profile_pic']
+            profile.save()
+            return render(request, 'oportunidades/user_profile.html', {
+        'profile': profile,
+        'opportunities': opportunities,
+    })
+    else:
+        form = ProfileEditForm(
+            initial = {
+                'description' : profile.description,
+                'profile_pic' : profile.profile_pic
+            })
+    return render(request, 'oportunidades/user_profile_edit.html', {'form': form, 'profile': profile})
+
