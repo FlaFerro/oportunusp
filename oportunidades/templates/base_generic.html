@@ -9,13 +9,18 @@
     <header>
         <h1>{% block header %}Bem-vindo ao OportunUSP{% endblock %}</h1>
         <nav>
-            <a href="{% url 'home' %}">Home</a> |  <!-- Link para a página inicial -->
+            <a href="{% url 'home' %}"> <button> Home </button> </a>
+            <!-- Outros links -->
             {% if user.is_authenticated %}
-                <a href="{% url 'user_profile' %}">Meu Perfil</a> | 
-                <a href="{% url 'create_opportunity' %}">Criar Oportunidade</a> |  <!-- Link para criar oportunidade -->
-                <a href="{% url 'logout' %}">Logout</a>
+                <a href="{% url 'user_profile' %}"> <button>Meu Perfil</button></a> 
+                <a href="{% url 'create_opportunity' %}"> <button>Criar Oportunidade</button> </a>   <!-- Link para criar oportunidade -->
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+                <!-- <a href="{% url 'logout' %}">Logout</a> -->
             {% else %}
-                <a href="{% url 'login' %}">Login</a>
+                <!-- <a href="{% url 'login' %}">Login</a>-->
             {% endif %}
         </nav>
     </header>

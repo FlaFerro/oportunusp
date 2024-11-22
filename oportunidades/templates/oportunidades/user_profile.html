@@ -11,7 +11,7 @@
     <p><strong>Email:</strong> {{ request.user.email }}</p>
     <p><strong>Descrição:</strong> {{ profile.description }}</p>
 </div>
-
+<a href="{% url 'edit_profile'%}"> <button>Editar perfil </button></a>
 <hr>
 
 <h3>Oportunidades Criadas</h3>

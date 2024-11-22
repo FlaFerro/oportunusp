@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Profile, Comment, Opportunity
-from django.forms import ModelForm
+
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -28,7 +28,7 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['content']
         
-class PostForm(ModelForm):
+class PostForm(forms.ModelForm):
     class Meta:
         model = Opportunity
         fields = [
@@ -44,3 +44,8 @@ class PostForm(ModelForm):
             'is_active':'Vísivel ao público?',
         }
         
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['description','profile_pic']
+        labels = {'description':'Descrição','profile_pic':'Foto de perfil'} 
