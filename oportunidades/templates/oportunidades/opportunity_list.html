@@ -4,15 +4,22 @@
 
 {% block content %}
     <h2>Lista de Oportunidades</h2>
+
+    <!-- Formulário de busca -->
+    <form method="get" action="{% url 'opportunity_list' %}">
+        <input type="text" name="q" placeholder="Buscar oportunidades..." value="{{ query }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Lista de oportunidades -->
     <ul>
         {% for opportunity in opportunities %}
             <li>
-                <strong>{{ opportunity.title }}</strong><br>
-                {{ opportunity.description }}<br>
+                <strong>{{ opportunity.title }}</strong> - {{ opportunity.description }}<br>
                 <a href="{% url 'opportunity_detail' opportunity.pk %}">Ver Detalhes</a>
             </li>
         {% empty %}
-            <li>Não há oportunidades disponíveis no momento.</li>
+            <li>Nenhuma oportunidade encontrada.</li>
         {% endfor %}
     </ul>
 {% endblock %}
