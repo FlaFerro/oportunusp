@@ -9,8 +9,19 @@ from django.http import HttpResponseRedirect
 from django.views import  View
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-
 from django.db.models import Q
+
+@login_required
+def subscribe_opportunity(request, pk):
+    opportunity = get_object_or_404(Opportunity, pk=pk)
+    opportunity.subscribers.add(request.user)  # Adiciona o usuário à lista de inscritos
+    return redirect('opportunity_detail', pk=pk)
+
+@login_required
+def unsubscribe_opportunity(request, pk):
+    opportunity = get_object_or_404(Opportunity, pk=pk)
+    opportunity.subscribers.remove(request.user)  # Remove o usuário da lista de inscritos
+    return redirect('opportunity_detail', pk=pk)
 
 def opportunity_list(request):
     query = request.GET.get('q')  # Obtém o termo de busca da URL

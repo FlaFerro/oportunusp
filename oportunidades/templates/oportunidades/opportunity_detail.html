@@ -7,7 +7,22 @@
     <h2>{{ opportunity.title }}</h2>
     <p>{{ opportunity.description }}</p>
     <p><strong>Publicado por:</strong> {{ opportunity.posted_by.username }}</p>
-    
+        {% if user.is_authenticated %}
+        {% if user in opportunity.subscribers.all %}
+            <form method="post" action="{% url 'unsubscribe_opportunity' opportunity.pk %}">
+                {% csrf_token %}
+                <button type="submit">Cancelar Inscrição</button>
+            </form>
+        {% else %}
+            <form method="post" action="{% url 'subscribe_opportunity' opportunity.pk %}">
+                {% csrf_token %}
+                <button type="submit">Se Inscrever</button>
+            </form>
+        {% endif %}
+    {% else %}
+        <p><a href="{% url 'login' %}">Faça login</a> para se inscrever nesta oportunidade.</p>
+    {% endif %}
+
     <h3>Comentários</h3>
     <ul>
         {% for comment in comments %}

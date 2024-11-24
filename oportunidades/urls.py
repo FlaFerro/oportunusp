@@ -15,4 +15,6 @@ urlpatterns = [
     path('opportunity_edit/<int:pk>/', views.opportunity_edit_updateView.as_view(), name='opportunity_edit'),
     path('criar/', views.create_opportunity, name='create_opportunity'),
     path('edit_profile/', views.edit_user_profile, name='edit_profile'), 
+    path('opportunity/<int:pk>/subscribe/', views.subscribe_opportunity, name='subscribe_opportunity'),
+    path('opportunity/<int:pk>/unsubscribe/', views.unsubscribe_opportunity, name='unsubscribe_opportunity'),
 ]

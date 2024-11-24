@@ -9,6 +9,7 @@ class Opportunity(models.Model):
     category = models.CharField(max_length=100)  # Área da pesquisa
     date_posted = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)  # Se a oportunidade está ativa
+    subscribers = models.ManyToManyField(User, related_name='subscribed_opportunities', blank=True)  # Usuários inscritos
 
     def __str__(self):
         return self.title
@@ -21,6 +22,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Quem fez o comentário
