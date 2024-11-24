@@ -10,11 +10,18 @@ from django.views import  View
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 
-
+from django.db.models import Q
 
 def opportunity_list(request):
-    opportunities = Opportunity.objects.all()
-    return render(request, 'oportunidades/opportunity_list.html', {'opportunities': opportunities})
+    query = request.GET.get('q')  # Obtém o termo de busca da URL
+    if query:
+        opportunities = Opportunity.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query)  # Busca no título e descrição
+        )
+    else:
+        opportunities = Opportunity.objects.all()
+    
+    return render(request, 'oportunidades/opportunity_list.html', {'opportunities': opportunities, 'query': query})
 
 # def opportunity_detail(request, pk):
 #     opportunity = get_object_or_404(Opportunity, pk=pk)
