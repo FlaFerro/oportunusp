@@ -19,14 +19,15 @@
     {% else %}
         <a href="{% url 'login' %}">
             <button>Entrar</button>
-        </a>
+        </a> 
+
         <a href="{% url 'register' %}">
-            <button>Criar Conta</button>
+            <button  >Criar Conta</button>
         </a>
     {% endif %}
     
     <h2>Oportunidades</h2>
     <a href="{% url 'opportunity_list' %}">
-        <button>Ver Oportunidades</button>
+        <button  >Ver Oportunidades</button>
     </a>
 {% endblock %}
