@@ -6,13 +6,31 @@
 {% block title %}Login - Oportunusp{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
+{% if user.is_authenticated %}
+{% else %}
+<section id="content-login">
+    <section id="login-box">
+        <div>
+        <h2>Login</h2>
+            <form class='form'method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button  type="submit">Entrar</button>
+            </form>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button  type="submit">Entrar</button>
-</form>
-
-<p>Não tem uma conta? <a href="{% url 'register' %}">Crie uma agora!</a></p>
+            <p>Não tem uma conta? <a href="{% url 'register' %}">Crie uma agora!</a></p>
+        </div>
+    </section>
+    <div id="intro_textbox">
+        <div class="intro_textbox_spacer"> </div>
+        <div class="intro-text">
+        <p>Bem-vindo ao Portal de Oportunidades Acadêmicas!</p>
+        <p> 
+            Nosso objetivo é conectar estudantes a diversas oportunidades de crescimento acadêmico e profissional. Aqui, você encontrará informações sobre bolsas de estudo, programas de intercâmbio, cursos de curta duração e muito mais. Navegue pelo nosso site para descobrir como podemos ajudar você a alcançar seus sonhos educacionais.
+        </p>
+        </div>
+        <div class="intro_textbox_spacer"> </div>
+    </div>
+</section>
+{% endif %}
 {% endblock %}

@@ -11,9 +11,10 @@
     <header>
         <h1>{% block header %}Bem-vindo ao OportunUSP{% endblock %}</h1>
         <nav>
-            <a href="{% url 'home' %}"> <button> Home </button> </a>
+            
             <!-- Outros links -->
             {% if user.is_authenticated %}
+                <a href="{% url 'home' %}"> <button> Home </button> </a>
                 <a href="{% url 'user_profile' %}"> <button>Meu Perfil</button></a> 
                 <a href="{% url 'create_opportunity' %}"> <button>Criar Oportunidade</button> </a>
                 <form style="display: inline" action="{% url 'logout' %}" method="post">
@@ -32,5 +33,10 @@
         {% block content %}
         {% endblock %}
     </div>
+    <section id="footer-section">
+        <footer>
+            <p> PMR3304 Sistemas de Informação - Grupo D - 2024  </p>
+        </footer>
+    </section>
 </body>
 </html>

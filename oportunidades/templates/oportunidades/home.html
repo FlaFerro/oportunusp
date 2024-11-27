@@ -1,6 +1,7 @@
 <!-- templates/home.html -->
 {% extends 'base_generic.html' %}
 
+
 {% block title %}Home - Oportunusp{% endblock %}
 
 {% block content %}
@@ -15,7 +16,9 @@
             {% csrf_token %}
             <button type="submit">Logout</button>
         </form>-->
-
+        <a href="{% url 'opportunity_list' %}">
+            <button  >Ver Oportunidades</button>
+        </a>
     {% else %}
         <a href="{% url 'login' %}">
             <button>Entrar</button>
@@ -25,9 +28,10 @@
             <button  >Criar Conta</button>
         </a>
     {% endif %}
-    
+    <!--
     <h2>Oportunidades</h2>
     <a href="{% url 'opportunity_list' %}">
         <button  >Ver Oportunidades</button>
     </a>
+    -->
 {% endblock %}

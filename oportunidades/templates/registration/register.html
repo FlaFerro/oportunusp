@@ -3,10 +3,12 @@
 {% block title %}Registrar-se{% endblock %}
 
 {% block content %}
+<section id="register-box">
   <h2>Registrar-se</h2>
-  <form method="post" enctype="multipart/form-data">
+  <form class = 'form' method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Registrar</button>
   </form>
+</section>
 {% endblock %}
