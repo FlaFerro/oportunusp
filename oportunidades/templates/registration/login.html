@@ -1,7 +1,6 @@
-<!-- templates/registration/login.html -->
 {% extends 'base_generic.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static  'style.css' %}">
+<link rel="stylesheet" href="{% static 'style.css' %}">
 
 {% block title %}Login - Oportunusp{% endblock %}
 
@@ -12,13 +11,16 @@
     <section id="login-box">
         <div>
         <h2>Login</h2>
-            <form class='form'method="post">
+            <form class='form' method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button  type="submit">Entrar</button>
+                <button type="submit">Entrar</button>
             </form>
 
             <p>Não tem uma conta? <a href="{% url 'register' %}">Crie uma agora!</a></p>
+            <a href="/password_reset/">Esqueci minha senha</a>
+
+
         </div>
     </section>
     <div id="intro_textbox">
