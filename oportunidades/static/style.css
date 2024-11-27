@@ -104,3 +104,4 @@ button {
 
 .button:hover {
   background-color: var(--button-hoverColor);
+}

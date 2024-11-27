@@ -17,4 +17,6 @@ urlpatterns = [
     path('edit_profile/', views.edit_user_profile, name='edit_profile'), 
     path('opportunity/<int:pk>/subscribe/', views.subscribe_opportunity, name='subscribe_opportunity'),
     path('opportunity/<int:pk>/unsubscribe/', views.unsubscribe_opportunity, name='unsubscribe_opportunity'),
+    path('profiles/', views.profile_list, name='profile_list'),
+    path('profiles/<int:pk>/', views.profile_detail, name='profile_detail'),
 ]

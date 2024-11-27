@@ -1,0 +1,17 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Perfil de {{ profile.user.username }}</h1>
+<p><strong>Nome:</strong> {{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+<p><strong>Email:</strong> {{ profile.user.email }}</p>
+<p><strong>Descrição:</strong> {{ profile.description }}</p>
+
+<h2>Oportunidades criadas por {{ profile.user.username }}</h2>
+<ul>
+    {% for opportunity in opportunities %}
+        <li><a href="{% url 'opportunity_detail' opportunity.id %}">{{ opportunity.title }}</a></li>
+    {% empty %}
+        <p>Nenhuma oportunidade criada por este usuário.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

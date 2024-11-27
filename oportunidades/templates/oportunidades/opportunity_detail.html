@@ -3,63 +3,85 @@
 {% block title %}Detalhes da Oportunidade{% endblock %}
 
 {% block content %}
-<a href="{% url  'opportunity_edit' opportunity.pk %}"> <button> Editar oportunidade </button></a>
-    <h2>{{ opportunity.title }}</h2>
-    <p>{{ opportunity.description }}</p>
-    <p><strong>Publicado por:</strong> {{ opportunity.posted_by.username }}</p>
-        {% if user.is_authenticated %}
-        {% if user in opportunity.subscribers.all %}
-            <form method="post" action="{% url 'unsubscribe_opportunity' opportunity.pk %}">
-                {% csrf_token %}
-                <button type="submit">Cancelar Inscrição</button>
-            </form>
-        {% else %}
-            <form method="post" action="{% url 'subscribe_opportunity' opportunity.pk %}">
-                {% csrf_token %}
-                <button type="submit">Se Inscrever</button>
-            </form>
-        {% endif %}
+<!-- Botão de editar oportunidade apenas para o criador -->
+{% if user == opportunity.posted_by %}
+    <a href="{% url 'opportunity_edit' opportunity.pk %}">
+        <button>Editar oportunidade</button>
+    </a>
+{% endif %}
+
+<h2>{{ opportunity.title }}</h2>
+<p>{{ opportunity.description }}</p>
+<p><strong>Publicado por:</strong> {{ opportunity.posted_by.username }}</p>
+
+<!-- Inscrição e Cancelamento -->
+{% if user.is_authenticated %}
+    {% if user in opportunity.subscribers.all %}
+        <form method="post" action="{% url 'unsubscribe_opportunity' opportunity.pk %}">
+            {% csrf_token %}
+            <button type="submit">Cancelar Inscrição</button>
+        </form>
     {% else %}
-        <p><a href="{% url 'login' %}">Faça login</a> para se inscrever nesta oportunidade.</p>
+        <form method="post" action="{% url 'subscribe_opportunity' opportunity.pk %}">
+            {% csrf_token %}
+            <button type="submit">Se Inscrever</button>
+        </form>
     {% endif %}
+{% else %}
+    <p><a href="{% url 'login' %}">Faça login</a> para se inscrever nesta oportunidade.</p>
+{% endif %}
 
-    <h3>Comentários</h3>
+<!-- Mostrar lista de inscritos apenas para o criador -->
+{% if user == opportunity.posted_by %}
+    <h3>Usuários Inscritos</h3>
     <ul>
-        {% for comment in comments %}
-            <li>
-                <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
-                <a href="#comment-{{ comment.id }}" onclick="document.getElementById('reply-{{ comment.id }}').style.display='block'">Responder</a>
-                
-                <!-- Respostas -->
-                <ul>
-                    {% for reply in comment.replies.all %}
-                        <li>
-                            <p><strong>{{ reply.user.username }}:</strong> {{ reply.content }}</p>
-                        </li>
-                    {% empty %}
-                        <li>Sem respostas.</li>
-                    {% endfor %}
-                </ul>
-
-                <!-- Formulário de resposta -->
-                <div id="reply-{{ comment.id }}" style="display:none;">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ comment_form.as_p }}
-                        <input type="hidden" name="parent_comment" value="{{ comment.id }}">
-                        <button type="submit">Responder</button>
-                    </form>
-                </div>
-            </li>
+        {% for inscrito in opportunity.subscribers.all %}
+            <li>{{ inscrito.username }}</li>
         {% empty %}
-            <li>Sem comentários.</li>
+            <li>Nenhum usuário inscrito nesta oportunidade.</li>
         {% endfor %}
     </ul>
+{% endif %}
 
-    <h3>Deixe um comentário</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit">Postar Comentário</button>
-    </form>
+<!-- Comentários -->
+<h3>Comentários</h3>
+<ul>
+    {% for comment in comments %}
+        <li>
+            <p><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</p>
+            <a href="#comment-{{ comment.id }}" onclick="document.getElementById('reply-{{ comment.id }}').style.display='block'">Responder</a>
+            
+            <!-- Respostas -->
+            <ul>
+                {% for reply in comment.replies.all %}
+                    <li>
+                        <p><strong>{{ reply.user.username }}:</strong> {{ reply.content }}</p>
+                    </li>
+                {% empty %}
+                    <li>Sem respostas.</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Formulário de resposta -->
+            <div id="reply-{{ comment.id }}" style="display:none;">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="hidden" name="parent_comment" value="{{ comment.id }}">
+                    <button type="submit">Responder</button>
+                </form>
+            </div>
+        </li>
+    {% empty %}
+        <li>Sem comentários.</li>
+    {% endfor %}
+</ul>
+
+<!-- Formulário para novo comentário -->
+<h3>Deixe um comentário</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">Postar Comentário</button>
+</form>
 {% endblock %}

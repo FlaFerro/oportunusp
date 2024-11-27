@@ -61,10 +61,14 @@ def opportunity_detail(request, pk):
     # Buscar os comentários da oportunidade
     comments = opportunity.comments.filter(parent_comment__isnull=True)  # Comentários principais (não respostas)
 
+    # Somente o criador da oportunidade pode ver os inscritos
+    inscritos = opportunity.subscribers.all() if opportunity.posted_by == request.user else None
+
     return render(request, 'oportunidades/opportunity_detail.html', {
         'opportunity': opportunity,
         'comments': comments,
-        'comment_form': comment_form
+        'comment_form': comment_form,
+        'inscritos': inscritos,  # Adiciona inscritos ao contexto
     })
 
 def register(request):
@@ -164,3 +168,17 @@ def edit_user_profile(request):
             })
     return render(request, 'oportunidades/user_profile_edit.html', {'form': form, 'profile': profile})
 
+def profile_list(request):
+    query = request.GET.get('q', '')  # Obtém o termo de busca da query string
+    profiles = Profile.objects.filter(
+        Q(user__username__icontains=query) | Q(user__email__icontains=query)
+    ) if query else Profile.objects.all()
+    return render(request, 'oportunidades/profile_list.html', {'profiles': profiles})
+
+def profile_detail(request, pk):
+    profile = get_object_or_404(Profile, user__id=pk)
+    opportunities = Opportunity.objects.filter(posted_by=profile.user)
+    return render(request, 'oportunidades/profile_detail.html', {
+        'profile': profile,
+        'opportunities': opportunities
+    })

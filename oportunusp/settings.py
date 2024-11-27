@@ -132,4 +132,4 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Configurações para uploads de mídia
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media' / 'oportunidades\static'
+MEDIA_ROOT = BASE_DIR / 'media' / 'oportunidades' / 'static'
