@@ -20,7 +20,7 @@
         <article class="card">
             <h3>{{ opportunity.title }}</h3>
             <h5 style="margin-top: 0;" > {{ opportunity.posted_by }}</h5>
-            <p>{{ opportunity.title }} ({{ opportunity.description }})</p>
+            <p>({{ opportunity.description }})</p>
             <div id="card_lower_section">
                 <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button></a>
             </div>

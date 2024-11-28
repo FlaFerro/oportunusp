@@ -4,10 +4,11 @@
     --background-color: #F3F5F4;
     --header-color: #F3F5F4; 
     --nav_color: #6e55a6 ; 
-    --content-color: #F3F5F4;  
+    --content-color: #ececec;  
     --accent-color: #ffffff;
     --border-color: #00000015;
     --text-dark:#65558F;
+    --card-background: #e4dde8;
 }
 
 body {
@@ -44,6 +45,8 @@ nav {
     align-items: center;
     width:fit-content;
     padding: 5%;
+    border-style: solid;
+    border-color: var(--border-color);
 }
 #content-login{ 
     display: flex;
@@ -61,7 +64,7 @@ nav {
 }
 
 #login-box {
-    background-color: var(--accent-color);
+    background-color: var(--card-background);
     padding: 5%;
     border-radius: 5px ;
     display: flex;
@@ -82,7 +85,7 @@ nav {
 .intro_text{
     display:flex;
     flex-direction: column;
-    background-color: var(--accent-color);
+    background-color: var(--card-background);
     flex-grow: 1;
     padding: 5%;
     border-radius: 5px ;
@@ -150,6 +153,7 @@ button:hover {
     margin: 1rem;
     padding: 1.25rem;
     width: 15cap;
+    background-color: var(--card-background);
   }
   #card_lower_section{
     display: flex;

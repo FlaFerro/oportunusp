@@ -1,6 +1,9 @@
+{% extends 'base_generic.html' %}
+{% block content %}
 <h2>Atualizar Oportunidade: {{ opportunity.title }} </h2>
 <form method="post" action="{% url  'opportunity_edit' opportunity.pk %}">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit"> Atualizar </button>
 </form>
+{% endblock %}

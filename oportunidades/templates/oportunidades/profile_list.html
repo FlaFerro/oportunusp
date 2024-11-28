@@ -1,19 +1,24 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h1>Lista de Perfis</h1>
+<h2>Usuários</h2>
+<div id="search">
 <form method="GET" action="{% url 'profile_list' %}">
     <input type="text" name="q" placeholder="Pesquisar por nome ou email" value="{{ request.GET.q }}">
     <button type="submit">Buscar</button>
 </form>
-
-<ul>
+</div>
+<section class="opportunities_list">
     {% for profile in profiles %}
-        <li>
-            <a href="{% url 'profile_detail' profile.user.id %}">
-                {{ profile.user.username }} - {{ profile.user.email }}
-            </a>
-        </li>
+        <article class="card">
+            <h3>{{ profile.user.username }}</h3>
+            <h5 style="margin-top: 0;" > {{ profile.user.email }}</h5>
+            <div id="card_lower_section">
+                <a href="{% url 'profile_detail' profile.user.id %}"> <button class="button_variation">Ver perfil</button></a>
+            </div>
+        </article>
+    {% empty %}
+        Nenhuma oportunidade encontrada.
     {% endfor %}
-</ul>
-{% endblock %}
+</section>
+ {% endblock %}
