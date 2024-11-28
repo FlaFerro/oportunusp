@@ -15,13 +15,18 @@
 <hr>
 
 <h3>Oportunidades Criadas</h3>
-<ul>
+<section class="opportunities_list">
     {% for opportunity in opportunities %}
-        <li>
-            <a href="{% url 'opportunity_detail' opportunity.pk %}">{{ opportunity.title }}</a> - {{ opportunity.date_posted|date:"d/m/Y" }}
-        </li>
+        <article class="card">
+            <h3>{{ opportunity.title }}</h3>
+            <h5 style="margin-top: 0;" > {{ opportunity.posted_by }}</h5>
+            <p>{{ opportunity.title }} ({{ opportunity.description }})</p>
+            <div id="card_lower_section">
+                <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button></a>
+            </div>
+      </article>
     {% empty %}
-        <li>Você ainda não criou nenhuma oportunidade.</li>
+        Nenhuma oportunidade encontrada.
     {% endfor %}
-</ul>
+</section>
 {% endblock %}

@@ -7,11 +7,18 @@
 <p><strong>Descrição:</strong> {{ profile.description }}</p>
 
 <h2>Oportunidades criadas por {{ profile.user.username }}</h2>
-<ul>
+<section class="opportunities_list">
     {% for opportunity in opportunities %}
-        <li><a href="{% url 'opportunity_detail' opportunity.id %}">{{ opportunity.title }}</a></li>
+    <article class="card">
+        <h3>{{ opportunity.title }}</h3>
+        <h5 style="margin-top: 0;" > {{ opportunity.posted_by }}</h5>
+        <p>{{ opportunity.title }} ({{ opportunity.description }})</p>
+        <div id="card_lower_section">
+            <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button></a>
+        </div>
+  </article>
     {% empty %}
         <p>Nenhuma oportunidade criada por este usuário.</p>
     {% endfor %}
-</ul>
+</section>
 {% endblock %}

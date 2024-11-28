@@ -149,7 +149,7 @@ button:hover {
     box-shadow: 2px 2px 5px var(--button-hoverColor);
     margin: 1rem;
     padding: 1.25rem;
-    width: 12cap;
+    width: 15cap;
   }
   #card_lower_section{
     display: flex;
@@ -157,4 +157,9 @@ button:hover {
     padding-top:10px;
     align-items: end;
     flex-grow: 1;
+  }
+  #search{
+    display: flex;
+    justify-content: end;
+    width: 100%;
   }
