@@ -167,3 +167,16 @@ button:hover {
     justify-content: end;
     width: 100%;
   }
+
+.profile-picture-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 500px; 
+    height: 500px;
+    border-radius: 50%; /* Redondo */
+    object-fit: cover;  /* Para manter a imagem sem distorção */
+}

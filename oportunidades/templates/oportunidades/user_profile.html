@@ -5,17 +5,19 @@
 {% block content %}
 <h2>Meu Perfil</h2>
 
-<div>
-    <img src="{{ profile.profile_picture.url }}" alt="Foto de perfil" style="max-width: 150px; border-radius: 50%;">
-    <p><strong>Usuário:</strong> {{ request.user.username }}</p>
-    <p><strong>Nome completo:</strong> {{ user.profile.full_name }}</p>
-    <p><strong>Email:</strong> {{ request.user.email }}</p>
-    <p><strong>Descrição:</strong> {{ profile.description }}</p>
-
-    <!-- Exibindo o tipo de usuário -->
-    <p><strong>Tipo de usuário:</strong> {{ profile.user_type }}</p>
+<div class="profile-picture-container">
+    <img src="{{ profile.profile_pic.url }}" alt="Foto de perfil" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;">
 </div>
-<a href="{% url 'edit_profile' %}"> <button>Editar perfil</button></a>
+
+<p><strong>Usuário:</strong> {{ request.user.username }}</p>
+<p><strong>Nome completo:</strong> {{ user.profile.full_name }}</p>
+<p><strong>Email:</strong> {{ request.user.email }}</p>
+<p><strong>Descrição:</strong> {{ profile.description }}</p>
+
+<!-- Exibindo o tipo de usuário -->
+<p><strong>Tipo de usuário:</strong> {{ profile.user_type }}</p>
+
+<a href="{% url 'edit_profile' %}"><button>Editar perfil</button></a>
 <hr>
 
 <h3>Oportunidades Criadas</h3>
