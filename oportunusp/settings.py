@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -155,3 +156,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'  # O nome de usuário é sempre 'apikey' para SendGrid
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 DEFAULT_FROM_EMAIL = 'oportunusp@gmail.com'  # E-mail do qual os e-mails serão enviados
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = ["127.0.0.1", ".onrender.com"] # modifique esta linha
+
+CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com/"] # adicione esta linha
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # adicione esta linha
