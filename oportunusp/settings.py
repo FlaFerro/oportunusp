@@ -166,7 +166,7 @@ ALLOWED_HOSTS = ["127.0.0.1", ".onrender.com"] # modifique esta linha
 
 CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com/"] # adicione esta linha
 
-# STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
+STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'oportunidades/static'), ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # adicione esta linha
 
 import os
