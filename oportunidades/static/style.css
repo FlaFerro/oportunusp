@@ -1,37 +1,49 @@
 :root {
-    --button-color:#6448a2;
-    --button-hoverColor: #2d0289;
-    --background_color: #FFF;
-    --header_color: #FFF; 
-    --nav_color: #FEF7FF ; 
-    --content_color: #FEF7FF;  
+    --button-color:#ECE6F0;
+    --button-hoverColor: #652a8c;
+    --background-color: #F3F5F4;
+    --header-color: #F3F5F4; 
+    --nav_color: #6e55a6 ; 
+    --content-color: #F3F5F4;  
+    --accent-color: #ffffff;
+    --border-color: #00000015;
+    --text-dark:#65558F;
 }
 
 body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: var(--background_color);
+    background-color: var(--background-color);
     align-items: center;
     flex-grow: 1;
+    padding:1%;
+ 
+
 }
 header{
-    background-color: var(--header_color);
+    background-color: var(--header-color);
     text-align: center;
+    width: 100%;
+    margin-left:5%;
+    margin-right: 5%; 
+    border-radius: 5px;
 }
 nav {
-    background-color: var(--nav_color);
+    background-color: var(--nav-color);
     display:flex;
     flex-direction: row;
     align-items: center;
-    flex-grow: 1;
+    justify-content: center;
 }
 .content{ 
+    background-color: var(--content-color);
     display: flex;
     flex-direction: column;
     margin-top: 2% ;
     align-items: center;
-    flex-grow: 1;
+    width:fit-content;
+    padding: 5%;
 }
 #content-login{ 
     display: flex;
@@ -42,20 +54,22 @@ nav {
 #register-box{
     display:flex;
     flex-direction: column;
-    background-color: var(--content_color);
+    background-color: var(--content-color);
     padding: 5%;
-    border-radius: 5% ;
+    border-radius: 5px ;
     align-items: center;
 }
 
 #login-box {
-    background-color: var(--content_color);
+    background-color: var(--accent-color);
     padding: 5%;
-    border-radius: 5% ;
+    border-radius: 5px ;
     display: flex;
     flex-grow: 3;
     margin-left: 5%;
     margin-right: 5%;
+    border-style: solid;
+    border-color: var(--border-color);
 }
 #intro_textbox{
     display:flex;
@@ -65,25 +79,26 @@ nav {
     padding: 2%;
     flex-shrink: 10;
 }
-.intro-text{
+.intro_text{
     display:flex;
     flex-direction: column;
-    background-color: var(--content_color);
+    background-color: var(--accent-color);
     flex-grow: 1;
-    padding: 2%;
-    border-radius: 5% ;
+    padding: 5%;
+    border-radius: 5px ;
     align-items:center ;
+    border-style:solid;
+    border-color: var(--border-color);
 }
 .intro_textbox_spacer{
     display:flex;
-    flex-grow: 2;
+    flex-grow: 1;
 }
 
 #footer-section{
     display:flex;
-    flex-grow: 1;
     align-items: end;
-    
+    flex-grow:1;
 }
 .form{
     display:flex;
@@ -99,9 +114,47 @@ button {
   text-align: center; 
   margin: 4px 2px; 
   border-radius: 12px; 
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
+  color: var(--text-dark);
+  box-shadow: 2px 2px 5px var(--button-hoverColor);
 }
+.button_variation {
+    background-color:  var(--button-color); 
+    border: none; 
+    color: white; 
+    padding: 5px 10px; 
+    text-align: center; 
+    margin: 4px 2px; 
+    border-radius: 25px; 
+    transition: background-color 0.3s ease;
+    color: var(--text-dark);
+    box-shadow: 2px 2px 5px var(--button-hoverColor);
+  }
 
-.button:hover {
+button:hover {
   background-color: var(--button-hoverColor);
+  color:#ffffff
 }
+.opportunities_list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px var(--button-hoverColor);
+    margin: 1rem;
+    padding: 1.25rem;
+    width: 12cap;
+  }
+  #card_lower_section{
+    display: flex;
+    justify-content: end;
+    padding-top:10px;
+    align-items: end;
+    flex-grow: 1;
+  }

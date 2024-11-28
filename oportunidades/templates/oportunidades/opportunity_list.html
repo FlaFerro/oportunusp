@@ -12,14 +12,18 @@
     </form>
 
     <!-- Lista de oportunidades -->
-    <ul>
+    <section class="opportunities_list">
         {% for opportunity in opportunities %}
-            <li>
-                <strong>{{ opportunity.title }}</strong> - {{ opportunity.description }}<br>
-                <a href="{% url 'opportunity_detail' opportunity.pk %}">Ver Detalhes</a>
-            </li>
+            <article class="card">
+                </a>
+                <h3> {{ opportunity.posted_by }}</h5>
+                <p>{{ opportunity.title }} ({{ opportunity.description }})</p>
+                <div id="card_lower_section">
+                    <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button>
+                </div>
+          </article>
         {% empty %}
             <li>Nenhuma oportunidade encontrada.</li>
         {% endfor %}
-    </ul>
+    </section>
 {% endblock %}

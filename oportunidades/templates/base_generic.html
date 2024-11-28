@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>{% block header %}Bem-vindo ao OportunUSP{% endblock %}</h1>
+        <h1>{% block header %}OportunUSP{% endblock %}</h1>
         <nav>
             <!-- Outros links -->
             {% if user.is_authenticated %}
@@ -31,6 +31,7 @@
         {% block content %}
         {% endblock %}
     </div>
+    
     <section id="footer-section">
         <footer>
             <p>PMR3304 Sistemas de Informação - Grupo D - 2024</p>
