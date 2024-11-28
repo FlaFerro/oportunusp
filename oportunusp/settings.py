@@ -149,7 +149,7 @@ EMAIL_HOST_PASSWORD = 'alej vymi utnr nwsw'  # Use uma senha de aplicativo se es
 #API
 
 from decouple import config
-SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='')
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY', default='')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
@@ -166,6 +166,7 @@ ALLOWED_HOSTS = ["127.0.0.1", ".onrender.com"] # modifique esta linha
 
 CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com/"] # adicione esta linha
 
+# STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # adicione esta linha
 
 import os
