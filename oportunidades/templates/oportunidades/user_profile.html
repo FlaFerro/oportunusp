@@ -5,9 +5,11 @@
 {% block content %}
 <h2>Meu Perfil</h2>
 
+{% if profile.profile_pic %}
 <div class="profile-picture-container">
     <img src="{{ profile.profile_pic.url }}" alt="Foto de perfil" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover;">
 </div>
+{% endif %}
 
 <p><strong>Usuário:</strong> {{ request.user.username }}</p>
 <p><strong>Nome completo:</strong> {{ user.profile.full_name }}</p>
