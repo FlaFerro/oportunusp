@@ -143,3 +143,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'seu_email@gmail.com'
 EMAIL_HOST_PASSWORD = 'sua_senha'  # Use uma senha de aplicativo se estiver usando Gmail
 
+#API
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'  # O nome de usuário é sempre 'apikey' para SendGrid
+EMAIL_HOST_PASSWORD = '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'
+DEFAULT_FROM_EMAIL = 'oportunusp@gmail.com'  # E-mail do qual os e-mails serão enviados

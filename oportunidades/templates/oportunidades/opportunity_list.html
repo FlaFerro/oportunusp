@@ -7,22 +7,31 @@
 
     <!-- Formulário de busca -->
     <div id="search">
-    <form method="get" action="{% url 'opportunity_list' %}">
-        <input type="text" name="q" placeholder="Buscar oportunidades..." value="{{ query }}">
-        <button type="submit">Buscar</button>
-    </form>
+        <form method="get" action="{% url 'opportunity_list' %}">
+            <input type="text" name="q" placeholder="Buscar oportunidades..." value="{{ query }}">
+            <button type="submit">Buscar</button>
+        </form>
     </div>
+
     <!-- Lista de oportunidades -->
     <section class="opportunities_list">
         {% for opportunity in opportunities %}
             <article class="card">
                 <h3>{{ opportunity.title }}</h3>
-                <h5 style="margin-top: 0;" > {{ opportunity.posted_by }}</h5>
+                <h5 style="margin-top: 0;">Criado por: {{ opportunity.posted_by }}</h5>
                 <p>({{ opportunity.description }})</p>
+
+                <!-- Exibe o aviso "Não visível" para oportunidades não visíveis criadas pelo usuário -->
+                {% if not opportunity.is_active and opportunity.posted_by == request.user %}
+                    <p style="color: red; font-weight: bold;">Não visível</p>
+                {% endif %}
+
                 <div id="card_lower_section">
-                    <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button></a>
+                    <a href="{% url 'opportunity_detail' opportunity.pk %}">
+                        <button class="button_variation">Ver detalhes</button>
+                    </a>
                 </div>
-          </article>
+            </article>
         {% empty %}
             Nenhuma oportunidade encontrada.
         {% endfor %}

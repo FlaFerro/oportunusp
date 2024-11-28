@@ -1,13 +1,16 @@
 {% extends 'base_generic.html' %}
 
-{% block title %}Criar Oportunidade{% endblock %}
-
 {% block content %}
-    <h2>Criar Oportunidade</h2>
+<h2>Criar Oportunidade</h2>
 
+{% if user.profile.user_type == 'aluno' %}
+    <p>Você não tem permissão para criar oportunidades.</p>
+    <a href="{% url 'home' %}">Voltar para a página inicial</a>
+{% else %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Criar Oportunidade</button>
     </form>
+{% endif %}
 {% endblock %}

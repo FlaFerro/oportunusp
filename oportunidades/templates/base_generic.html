@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static  'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>{% block title %}Login{% endblock %}</title>
 </head>
 <body>
@@ -15,8 +15,13 @@
             {% if user.is_authenticated %}
                 <a href="{% url 'home' %}"><button>Home</button></a>
                 <a href="{% url 'user_profile' %}"><button>Meu Perfil</button></a>
-                <a href="{% url 'create_opportunity' %}"><button>Criar Oportunidade</button></a>
-                <a href="{% url 'opportunity_list' %}"><button>Lista de Oportunidades</button></a> <!-- Botão adicionado -->
+                
+                <!-- Mostrar o botão de Criar Oportunidade apenas se o usuário não for aluno -->
+                {% if user.profile.user_type != 'aluno' %}
+                    <a href="{% url 'create_opportunity' %}"><button>Criar Oportunidade</button></a>
+                {% endif %}
+
+                <a href="{% url 'opportunity_list' %}"><button>Lista de Oportunidades</button></a>
                 <a href="{% url 'profile_list' %}"><button>Lista de Usuários</button></a>
                 <form style="display: inline" action="{% url 'logout' %}" method="post">
                     {% csrf_token %}

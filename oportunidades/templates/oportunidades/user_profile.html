@@ -8,10 +8,14 @@
 <div>
     <img src="{{ profile.profile_picture.url }}" alt="Foto de perfil" style="max-width: 150px; border-radius: 50%;">
     <p><strong>Usuário:</strong> {{ request.user.username }}</p>
+    <p><strong>Nome completo:</strong> {{ user.profile.full_name }}</p>
     <p><strong>Email:</strong> {{ request.user.email }}</p>
     <p><strong>Descrição:</strong> {{ profile.description }}</p>
+
+    <!-- Exibindo o tipo de usuário -->
+    <p><strong>Tipo de usuário:</strong> {{ profile.user_type }}</p>
 </div>
-<a href="{% url 'edit_profile'%}"> <button>Editar perfil </button></a>
+<a href="{% url 'edit_profile' %}"> <button>Editar perfil</button></a>
 <hr>
 
 <h3>Oportunidades Criadas</h3>
@@ -19,14 +23,36 @@
     {% for opportunity in opportunities %}
         <article class="card">
             <h3>{{ opportunity.title }}</h3>
-            <h5 style="margin-top: 0;" > {{ opportunity.posted_by }}</h5>
+            <h5 style="margin-top: 0;">{{ opportunity.posted_by }}</h5>
             <p>({{ opportunity.description }})</p>
             <div id="card_lower_section">
-                <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button></a>
+                <a href="{% url 'opportunity_detail' opportunity.pk %}">
+                    <button class="button_variation">Ver detalhes</button>
+                </a>
             </div>
-      </article>
+        </article>
     {% empty %}
-        Nenhuma oportunidade encontrada.
+        <p>Nenhuma oportunidade encontrada.</p>
+    {% endfor %}
+</section>
+
+<hr>
+
+<h3>Oportunidades em que estou inscrito</h3>
+<section class="opportunities_list">
+    {% for opportunity in subscribed_opportunities %}
+        <article class="card">
+            <h3>{{ opportunity.title }}</h3>
+            <h5 style="margin-top: 0;">{{ opportunity.posted_by }}</h5>
+            <p>({{ opportunity.description }})</p>
+            <div id="card_lower_section">
+                <a href="{% url 'opportunity_detail' opportunity.pk %}">
+                    <button class="button_variation">Ver detalhes</button>
+                </a>
+            </div>
+        </article>
+    {% empty %}
+        <p>Você não está inscrito em nenhuma oportunidade.</p>
     {% endfor %}
 </section>
 {% endblock %}

@@ -5,6 +5,7 @@ from .models import Profile, Comment, Opportunity
 
 
 class UserRegistrationForm(forms.ModelForm):
+    full_name = forms.CharField(max_length=255, required=True, label="Nome Completo")
     password = forms.CharField(widget=forms.PasswordInput)
     description = forms.CharField(
         widget=forms.Textarea, 
@@ -12,10 +13,11 @@ class UserRegistrationForm(forms.ModelForm):
         label="Descrição do perfil"
     )
     profile_pic = forms.ImageField(required=False, label="Foto de perfil")
+    user_type = forms.ChoiceField(choices=Profile.USER_TYPES, required=True)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'full_name', 'email', 'password', 'user_type']
 
     def clean_password(self):
         password = self.cleaned_data.get('password')

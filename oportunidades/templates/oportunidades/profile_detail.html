@@ -1,14 +1,16 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h1>Perfil de {{ profile.user.username }}</h1>
-<p><strong>Nome:</strong> {{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+<h1>{{ profile.full_name }}</h1>
 <p><strong>Email:</strong> {{ profile.user.email }}</p>
 <p><strong>Descrição:</strong> {{ profile.description }}</p>
 
+<!-- Exibindo o tipo de usuário -->
+<p><strong>Tipo de usuário:</strong> {{ profile.user_type }}</p>
+
 <h2>Oportunidades criadas por {{ profile.user.username }}</h2>
 <section class="opportunities_list">
-    {% for opportunity in opportunities %}
+    {% for opportunity in created_opportunities %}
     <article class="card">
         <h3>{{ opportunity.title }}</h3>
         <h5 style="margin-top: 0;" > {{ opportunity.posted_by }}</h5>
@@ -16,9 +18,25 @@
         <div id="card_lower_section">
             <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button></a>
         </div>
-  </article>
+    </article>
     {% empty %}
         <p>Nenhuma oportunidade criada por este usuário.</p>
+    {% endfor %}
+</section>
+
+<h2>Oportunidades nas quais {{ profile.user.username }} se inscreveu</h2>
+<section class="opportunities_list">
+    {% for opportunity in subscribed_opportunities %}
+    <article class="card">
+        <h3>{{ opportunity.title }}</h3>
+        <h5 style="margin-top: 0;" > {{ opportunity.posted_by }}</h5>
+        <p>{{ opportunity.title }} ({{ opportunity.description }})</p>
+        <div id="card_lower_section">
+            <a href="{% url 'opportunity_detail' opportunity.pk %}"> <button class="button_variation">Ver detalhes</button></a>
+        </div>
+    </article>
+    {% empty %}
+        <p>{{ profile.user.username }} não está inscrito em nenhuma oportunidade.</p>
     {% endfor %}
 </section>
 {% endblock %}
